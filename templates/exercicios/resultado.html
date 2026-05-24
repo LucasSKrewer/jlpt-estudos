@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Resultado {{ nivel }} · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb">
+            <a href="{{ url_for('home') }}">Início</a> /
+            <a href="{{ url_for('exercicios.inicio') }}">Exercícios</a> /
+            Resultado
+        </div>
+        <h1>結果 <span class="muted">— Resultado {{ nivel }}</span></h1>
+        <p class="muted">{{ tipo_label }} · {{ total }} questões</p>
+    </div>
+</div>
+
+<section class="resultado-resumo">
+    <div class="resultado-pontuacao">
+        <div class="pontuacao-numero">{{ acertos }}<span class="pontuacao-de">/{{ total }}</span></div>
+        <div class="pontuacao-pct">{{ pct }}%</div>
+        <div class="pontuacao-msg">
+            {% if pct >= 80 %}
+                Excelente! Você está pronto pra avançar nesse conteúdo.
+            {% elif pct >= 60 %}
+                Bom resultado. Revise as palavras que errou e tente de novo.
+            {% elif pct >= 40 %}
+                Vale revisitar os tópicos antes de tentar de novo.
+            {% else %}
+                Hora de revisitar o vocabulário — comece pelos tópicos com mais erros.
+            {% endif %}
+        </div>
+    </div>
+    <div class="resultado-acoes">
+        <a class="btn-primary" href="{{ url_for('exercicios.configurar', nivel=nivel) }}">Tentar de novo</a>
+        <a class="btn-ghost" href="{{ url_for('exercicios.inicio') }}">Mudar de nível</a>
+    </div>
+</section>
+
+<h2 class="section-h">Revisão das questões</h2>
+<div class="revisao-lista">
+    {% for d in detalhamento %}
+        <article class="revisao-item {% if d.correto %}revisao-ok{% else %}revisao-erro{% endif %}">
+            <div class="revisao-cabecalho">
+                <span class="revisao-num">{{ d.numero }}</span>
+                <span class="revisao-tipo muted">{{ d.questao.enunciado }}</span>
+                <span class="revisao-status">{% if d.correto %}✓{% else %}✗{% endif %}</span>
+            </div>
+            <div class="revisao-pergunta">{{ d.questao.pergunta }}</div>
+            <div class="revisao-detalhes">
+                <div>
+                    <span class="revisao-rotulo">Sua resposta:</span>
+                    <span class="{% if d.correto %}revisao-correta{% else %}revisao-errada{% endif %}">{{ d.resposta_usuario or '—' }}</span>
+                </div>
+                {% if not d.correto %}
+                    <div>
+                        <span class="revisao-rotulo">Correta:</span>
+                        <span class="revisao-correta">{{ d.questao.correta }}</span>
+                    </div>
+                {% endif %}
+                <div class="muted">{{ d.questao.explicacao }}</div>
+            </div>
+        </article>
+    {% endfor %}
+</div>
+{% endblock %}

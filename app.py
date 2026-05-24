@@ -4,6 +4,7 @@ from config import PORT, SECRET_KEY
 from database import init_db, get_conn
 from modulos.vocabulario import bp as vocabulario_bp
 from modulos.kana import bp as kana_bp
+from modulos.exercicios import bp as exercicios_bp
 
 
 def create_app():
@@ -15,6 +16,7 @@ def create_app():
 
     app.register_blueprint(vocabulario_bp, url_prefix="/vocabulario")
     app.register_blueprint(kana_bp, url_prefix="/kana")
+    app.register_blueprint(exercicios_bp, url_prefix="/exercicios")
 
     @app.route("/")
     def home():

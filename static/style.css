@@ -338,6 +338,277 @@ main.container { padding-top: 36px; padding-bottom: 64px; }
 .flash-success { background: #e2ecd0; color: #3a5024; }
 .flash-info { background: var(--accent-soft); color: var(--accent-dark); }
 
+/* ============== EXERCÍCIOS / QUIZ ============== */
+.quiz-config { max-width: 720px; margin: 0 auto; }
+.config-bloco {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 18px;
+}
+.config-bloco legend {
+    padding: 0 8px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+.radio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+.radio-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+    background: var(--bg);
+    transition: all .15s ease;
+}
+.radio-card:hover { border-color: var(--accent); }
+.radio-card input { accent-color: var(--accent); }
+.radio-card input:checked + .radio-label { color: var(--accent); font-weight: 700; }
+.radio-card:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.radio-card-sm { padding: 10px 12px; }
+.radio-label { font-size: 14px; }
+
+.select-wrap select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font: inherit;
+    color: var(--ink);
+    cursor: pointer;
+}
+.select-wrap select:focus { outline: none; border-color: var(--accent); }
+
+.quiz-actions { display: flex; gap: 12px; align-items: center; margin-top: 24px; }
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 22px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+.btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
+.btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 22px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.btn-link { background: none; border: none; color: var(--muted); cursor: pointer; font: inherit; text-decoration: underline; }
+.btn-link:hover { color: var(--accent); }
+
+.quiz-progresso { max-width: 720px; margin: 0 auto 20px; }
+.quiz-progresso-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+.quiz-progresso-num {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+}
+
+.questao-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+}
+.questao-enunciado {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+.questao-pergunta {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 38px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.questao-pergunta-texto { flex: 0 1 auto; }
+.questao-pergunta-sub { font-size: 16px; margin-bottom: 24px; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; }
+.questao-pergunta + .alternativas { margin-top: 28px; }
+
+.alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+.alternativa {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font: inherit;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all .15s ease;
+    color: var(--ink);
+}
+.alternativa:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateX(2px);
+}
+.alternativa:disabled { cursor: default; }
+.alt-letra {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+.alt-texto { flex: 1; }
+.alt-marca { font-size: 22px; font-weight: 700; }
+
+.alt-correta {
+    border-color: var(--aprendido);
+    background: #ebf2dc;
+    color: var(--aprendido);
+    font-weight: 600;
+}
+.alt-correta .alt-letra { background: var(--aprendido); color: #fff; border-color: var(--aprendido); }
+.alt-errada {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 600;
+}
+.alt-errada .alt-letra { background: var(--accent); color: #fff; border-color: var(--accent); }
+.alt-neutra { opacity: 0.55; }
+
+.questao-feedback {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--line);
+}
+.feedback-ok { background: #ebf2dc; border-left-color: var(--aprendido); color: #3a5024; }
+.feedback-erro { background: var(--accent-soft); border-left-color: var(--accent); color: var(--accent-dark); }
+.feedback-explicacao { margin-top: 8px; font-size: 14px; color: var(--ink); }
+.feedback-topico { font-size: 12px; margin-top: 6px; }
+
+.quiz-nav { margin-top: 24px; display: flex; justify-content: flex-end; }
+
+.quiz-rodape { max-width: 720px; margin: 24px auto 0; text-align: center; }
+
+/* RESULTADO */
+.resultado-resumo {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+}
+.resultado-pontuacao { margin-bottom: 20px; }
+.pontuacao-numero {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+.pontuacao-de { font-size: 36px; color: var(--ink-soft); }
+.pontuacao-pct { font-size: 18px; color: var(--ink); margin-top: 8px; letter-spacing: 1px; }
+.pontuacao-msg { font-size: 15px; color: var(--ink-soft); margin-top: 14px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+.resultado-acoes { display: flex; justify-content: center; gap: 12px; }
+
+.revisao-lista { display: flex; flex-direction: column; gap: 12px; }
+.revisao-item {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+}
+.revisao-ok { border-left-color: var(--aprendido); }
+.revisao-erro { border-left-color: var(--accent); }
+.revisao-cabecalho { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.revisao-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    color: var(--ink-soft);
+}
+.revisao-tipo { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; flex: 1; }
+.revisao-status { font-size: 18px; font-weight: 700; }
+.revisao-ok .revisao-status { color: var(--aprendido); }
+.revisao-erro .revisao-status { color: var(--accent); }
+.revisao-pergunta {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 4px 0 10px;
+}
+.revisao-detalhes { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.revisao-rotulo { color: var(--muted); margin-right: 6px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.revisao-correta { color: var(--aprendido); font-weight: 600; }
+.revisao-errada { color: var(--accent); text-decoration: line-through; }
+
+/* ============== FIM EXERCÍCIOS ============== */
+
 .footer {
     border-top: 1px solid var(--line);
     padding: 24px 0;

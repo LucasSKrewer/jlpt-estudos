@@ -13,11 +13,12 @@ português e exemplo de uso, e acompanha o **progresso por palavra**
 
 ## Conteúdo atual
 
-| Seção          | Conteúdo                                             |
-|----------------|------------------------------------------------------|
-| Vocabulário N5 | 24 tópicos / ~285 palavras                           |
-| Vocabulário N4 | 8 tópicos / ~96 palavras                             |
-| Kana           | Hiragana + Katakana completos (gojūon, dakuten, yōon) |
+| Seção          | Conteúdo                                                              |
+|----------------|-----------------------------------------------------------------------|
+| Vocabulário N5 | 24 tópicos / ~285 palavras                                            |
+| Vocabulário N4 | 8 tópicos / ~96 palavras                                              |
+| Kana           | Hiragana + Katakana completos (gojūon, dakuten, yōon)                 |
+| Exercícios     | Quiz no estilo da prova mojigoi (文字・語彙) — leitura / significado / termo |
 
 O conteúdo do **N5** cobre o currículo do JLPT N5 com tópicos progressivos
 (saudações → pronomes → números → tempo → família → verbos do dia a dia →
@@ -140,6 +141,7 @@ O banco fica em `jlpt.db` (gitignored — é progresso local do usuário).
 - [x] N4 com 8 tópicos / ~96 palavras
 - [x] Áudio TTS por palavra e por frase de exemplo (Web Speech API)
 - [x] Aba Kana: hiragana + katakana com tabelas completas e uso por nível
+- [x] Aba Exercícios: quiz por nível no estilo mojigoi do JLPT (leitura / significado / termo / misto)
 - [ ] Expandir N4 para cobrir o currículo completo
 - [ ] Modo quiz por tópico (leitura → escolher significado)
 - [ ] Marcar tópicos como "revisar depois"

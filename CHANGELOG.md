@@ -5,6 +5,22 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.0] — 2026-05-24
+
+### Adicionado
+- Nova aba **Exercícios** (`/exercicios/`) — quiz no estilo da prova mojigoi (文字・語彙) do JLPT
+- 3 tipos de questão (todos formato múltipla escolha com 4 alternativas):
+  - **Leitura** (漢字読み) — mostra a palavra com kanji, escolhe a leitura correta em hiragana
+  - **Significado** — mostra o termo japonês, escolhe o significado em português
+  - **Termo** — mostra o significado em PT, escolhe a palavra japonesa
+  - **Misto** — combina os três tipos em uma sessão única
+- Quiz **separado por nível** (N5 ou N4) com filtro opcional por tópico e escolha da quantidade de questões (5–50)
+- Tela por questão com feedback imediato (alternativa correta destacada em verde matcha, errada em vermelho selo, neutras com opacidade reduzida)
+- Página de resultado com pontuação, percentual, mensagem motivacional adaptativa e revisão item a item
+- Botão de áudio integrado nas questões de leitura e significado (reaproveita Web Speech API)
+- Blueprint `modulos/exercicios/` com `gerador.py` (lógica pura, sem efeitos) e `routes.py` (estado em session Flask)
+- Link "Exercícios" no topbar e card 問 na home
+
 ## [0.4.0] — 2026-05-24
 
 ### Alterado

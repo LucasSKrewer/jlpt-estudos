@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Questão {{ idx }}/{{ total }} — {{ nivel }} · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="quiz-progresso">
+    <div class="quiz-progresso-info">
+        <span class="quiz-progresso-num">Questão {{ idx }} de {{ total }}</span>
+        <span class="muted">{{ tipo_label }}</span>
+    </div>
+    <div class="bar bar-md"><div class="bar-fill" style="width: {{ (idx / total) * 100 }}%"></div></div>
+</div>
+
+<article class="questao-card">
+    <div class="questao-enunciado">{{ questao.enunciado }}</div>
+    <div class="questao-pergunta">
+        <span class="questao-pergunta-texto">{{ questao.pergunta }}</span>
+        {% if questao.tipo in ('leitura', 'significado') and questao.tipo != 'termo' %}
+            <button type="button" class="btn-play btn-play-lg" data-fala="{{ questao.pergunta if questao.tipo != 'significado' else (questao.pergunta_sub or questao.pergunta) }}" aria-label="Ouvir pronúncia">🔊</button>
+        {% endif %}
+    </div>
+    {% if questao.pergunta_sub and resposta %}
+        <div class="questao-pergunta-sub muted">{{ questao.pergunta_sub }}</div>
+    {% endif %}
+
+    <form action="{{ url_for('exercicios.responder', nivel=nivel, idx=idx) }}" method="post" class="alternativas">
+        {% for alt in questao.alternativas %}
+            {% set marcada = (resposta == alt) %}
+            {% set correta = (alt == questao.correta) %}
+            {% set revelada = (resposta is not none and resposta != '') %}
+            <button type="submit" name="alternativa" value="{{ alt }}"
+                class="alternativa
+                    {% if revelada and correta %}alt-correta{% endif %}
+                    {% if revelada and marcada and not correta %}alt-errada{% endif %}
+                    {% if revelada and not marcada and not correta %}alt-neutra{% endif %}"
+                {% if revelada %}disabled{% endif %}>
+                <span class="alt-letra">{{ loop.index }}</span>
+                <span class="alt-texto">{{ alt }}</span>
+                {% if revelada and correta %}<span class="alt-marca">✓</span>{% endif %}
+                {% if revelada and marcada and not correta %}<span class="alt-marca">✗</span>{% endif %}
+            </button>
+        {% endfor %}
+    </form>
+
+    {% if resposta %}
+        <div class="questao-feedback {% if resposta == questao.correta %}feedback-ok{% else %}feedback-erro{% endif %}">
+            {% if resposta == questao.correta %}
+                <strong>✓ Correto!</strong>
+            {% else %}
+                <strong>✗ Resposta correta:</strong> {{ questao.correta }}
+            {% endif %}
+            <div class="feedback-explicacao">{{ questao.explicacao }}</div>
+            {% if questao.topico %}<div class="muted feedback-topico">Tópico: {{ questao.topico }}</div>{% endif %}
+        </div>
+
+        <div class="quiz-nav">
+            {% if idx < total %}
+                <a class="btn-primary" href="{{ url_for('exercicios.proxima', nivel=nivel, idx=idx) }}">Próxima questão →</a>
+            {% else %}
+                <a class="btn-primary" href="{{ url_for('exercicios.resultado', nivel=nivel) }}">Ver resultado →</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</article>
+
+<div class="quiz-rodape">
+    <form action="{{ url_for('exercicios.limpar', nivel=nivel) }}" method="post" style="display:inline">
+        <button type="submit" class="btn-link">Cancelar e voltar ao começo</button>
+    </form>
+</div>
+{% endblock %}

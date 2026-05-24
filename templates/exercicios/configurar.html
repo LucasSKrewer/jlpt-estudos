@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Configurar quiz {{ nivel.codigo }} · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb">
+            <a href="{{ url_for('home') }}">Início</a> /
+            <a href="{{ url_for('exercicios.inicio') }}">Exercícios</a> /
+            {{ nivel.codigo }}
+        </div>
+        <h1>Configurar quiz {{ nivel.codigo }}</h1>
+        <p class="muted">{{ total_palavras }} palavras disponíveis. Configure o quiz e clique em <strong>Iniciar</strong>.</p>
+    </div>
+</div>
+
+<form action="{{ url_for('exercicios.iniciar', nivel=nivel.codigo) }}" method="post" class="quiz-config">
+    <fieldset class="config-bloco">
+        <legend>Tipo de questão</legend>
+        <div class="radio-grid">
+            {% for valor, label in tipos.items() %}
+                <label class="radio-card">
+                    <input type="radio" name="tipo" value="{{ valor }}" {% if valor == 'misto' %}checked{% endif %}>
+                    <span class="radio-label">{{ label }}</span>
+                </label>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <fieldset class="config-bloco">
+        <legend>Quantidade de questões</legend>
+        <div class="radio-grid">
+            {% for n in [10, 15, 20, 30] %}
+                <label class="radio-card radio-card-sm">
+                    <input type="radio" name="qtd" value="{{ n }}" {% if n == 10 %}checked{% endif %}>
+                    <span class="radio-label">{{ n }} questões</span>
+                </label>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <fieldset class="config-bloco">
+        <legend>Tópico</legend>
+        <div class="select-wrap">
+            <select name="topico">
+                <option value="todos">Todos os tópicos ({{ total_palavras }} palavras)</option>
+                {% for t in topicos %}
+                    <option value="{{ t.slug }}">{{ t.titulo }} ({{ t.qtd_palavras }} palavras)</option>
+                {% endfor %}
+            </select>
+        </div>
+    </fieldset>
+
+    <div class="quiz-actions">
+        <button type="submit" class="btn-primary">Iniciar quiz →</button>
+        <a href="{{ url_for('exercicios.inicio') }}" class="btn-ghost">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Exercícios · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb"><a href="{{ url_for('home') }}">Início</a> / Exercícios</div>
+        <h1>練習問題 <span class="muted">— Exercícios</span></h1>
+        <p class="muted">Pratique no formato real da prova mojigoi (文字・語彙) do JLPT. Escolha o nível e o tipo de questão.</p>
+    </div>
+</div>
+
+<section class="cards">
+    {% for n in niveis %}
+        <a class="card card-nivel nivel-{{ n.codigo|lower }}" href="{{ url_for('exercicios.configurar', nivel=n.codigo) }}">
+            <span class="card-tag">{{ n.codigo }}</span>
+            <div class="card-kanji">{% if n.codigo == 'N5' %}試{% else %}験{% endif %}</div>
+            <h2>Praticar {{ n.codigo }}</h2>
+            <p>{{ contagens.get(n.codigo, 0) }} palavras disponíveis no banco para gerar exercícios.</p>
+            <span class="card-cta">Configurar quiz →</span>
+        </a>
+    {% endfor %}
+</section>
+
+<section class="info">
+    <h3>形式 — Formato das questões</h3>
+    <ol>
+        <li><strong>Leitura do kanji</strong> — mostramos a palavra com kanji e você escolhe a leitura correta em hiragana. Estilo 漢字読み.</li>
+        <li><strong>Significado em português</strong> — mostramos o termo japonês e você escolhe o significado. Estilo 文脈規定.</li>
+        <li><strong>Termo japonês</strong> — mostramos o significado em PT e você escolhe a palavra japonesa.</li>
+        <li><strong>Misto</strong> — combina os três tipos em uma sessão única, como em uma prova real.</li>
+    </ol>
+</section>
+{% endblock %}
