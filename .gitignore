@@ -1,0 +1,31 @@
+# Banco de dados local (contém progresso pessoal)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+# IDE / editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}JLPT Estudos{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>日本語能力試験</h1>
+    <p class="hero-sub">Estudos para a prova de proficiência em japonês — foco em N5 e N4.</p>
+</section>
+
+<section class="cards">
+    {% for n in niveis %}
+        <a class="card card-nivel nivel-{{ n.codigo|lower }}" href="{{ url_for('vocabulario.roadmap', nivel=n.codigo) }}">
+            <div class="card-tag">{{ n.codigo }}</div>
+            <h2>{{ n.nome }}</h2>
+            <p>{{ n.descricao }}</p>
+            <span class="card-cta">Abrir roadmap →</span>
+        </a>
+    {% endfor %}
+</section>
+
+<section class="info">
+    <h3>Como funciona</h3>
+    <ol>
+        <li>Escolha um nível (comece pelo <strong>N5</strong>).</li>
+        <li>Siga o roadmap de tópicos na ordem sugerida.</li>
+        <li>Em cada tópico, marque as palavras como <em>estudando</em> ou <em>aprendido</em>.</li>
+        <li>Acompanhe seu progresso por nível e por tópico.</li>
+    </ol>
+</section>
+{% endblock %}

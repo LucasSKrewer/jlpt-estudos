@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Roadmap {{ nivel.codigo }} · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb"><a href="{{ url_for('home') }}">Início</a> / Vocabulário</div>
+        <h1>Roadmap {{ nivel.codigo }} <span class="muted">— {{ nivel.nome }}</span></h1>
+        {% if nivel.descricao %}<p class="muted">{{ nivel.descricao }}</p>{% endif %}
+    </div>
+    <div class="nivel-switch">
+        {% for n in niveis %}
+            <a href="{{ url_for('vocabulario.roadmap', nivel=n.codigo) }}"
+               class="pill {% if n.codigo == nivel.codigo %}pill-active{% endif %}">{{ n.codigo }}</a>
+        {% endfor %}
+        <a href="{{ url_for('vocabulario.progresso', nivel=nivel.codigo) }}" class="pill pill-ghost">Progresso</a>
+    </div>
+</div>
+
+<div class="overview">
+    <div class="overview-stat">
+        <span class="stat-label">Palavras totais</span>
+        <span class="stat-value">{{ total }}</span>
+    </div>
+    <div class="overview-stat">
+        <span class="stat-label">Aprendidas</span>
+        <span class="stat-value">{{ aprendidas }}</span>
+    </div>
+    <div class="overview-stat">
+        <span class="stat-label">Progresso</span>
+        <span class="stat-value">{{ pct }}%</span>
+    </div>
+    <div class="bar"><div class="bar-fill" style="width: {{ pct }}%"></div></div>
+</div>
+
+<ol class="roadmap">
+    {% for t in topicos %}
+        {% set tot = t.total_palavras or 0 %}
+        {% set apr = t.aprendidas or 0 %}
+        {% set tpct = (apr / tot * 100) if tot else 0 %}
+        <li class="roadmap-item {% if tot and apr == tot %}done{% elif apr > 0 %}in-progress{% endif %}">
+            <a class="roadmap-card" href="{{ url_for('vocabulario.topico', nivel=nivel.codigo, slug=t.slug) }}">
+                <div class="roadmap-order">{{ t.ordem }}</div>
+                <div class="roadmap-body">
+                    <h3>{{ t.titulo }}</h3>
+                    {% if t.descricao %}<p class="muted">{{ t.descricao }}</p>{% endif %}
+                    <div class="roadmap-meta">
+                        <span>{{ apr }}/{{ tot }} palavras</span>
+                        <div class="bar bar-sm"><div class="bar-fill" style="width: {{ tpct }}%"></div></div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    {% else %}
+        <li class="muted">Nenhum tópico cadastrado neste nível ainda.</li>
+    {% endfor %}
+</ol>
+{% endblock %}

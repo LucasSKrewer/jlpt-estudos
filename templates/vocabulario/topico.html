@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ topico.titulo }} · {{ nivel.codigo }} · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb">
+            <a href="{{ url_for('home') }}">Início</a> /
+            <a href="{{ url_for('vocabulario.roadmap', nivel=nivel.codigo) }}">Roadmap {{ nivel.codigo }}</a>
+        </div>
+        <h1>{{ topico.titulo }}</h1>
+        {% if topico.descricao %}<p class="muted">{{ topico.descricao }}</p>{% endif %}
+    </div>
+    <div class="topico-stats">
+        <div>
+            <span class="stat-label">Aprendidas</span>
+            <span class="stat-value">{{ aprendidas }}/{{ total }}</span>
+        </div>
+        <div class="bar bar-md"><div class="bar-fill" style="width: {{ pct }}%"></div></div>
+    </div>
+</div>
+
+<div class="palavras">
+    {% for p in palavras %}
+        <article id="palavra-{{ p.id }}" class="palavra status-{{ p.status }}">
+            <div class="palavra-main">
+                <div class="palavra-jp">
+                    <div class="termo">{{ p.termo }}</div>
+                    <div class="leitura">{{ p.leitura }}{% if p.romaji %} · <span class="romaji">{{ p.romaji }}</span>{% endif %}</div>
+                </div>
+                <div class="palavra-meta">
+                    {% if p.classe %}<span class="chip">{{ p.classe }}</span>{% endif %}
+                    <span class="status-tag status-tag-{{ p.status }}">{{ p.status }}</span>
+                </div>
+            </div>
+            <div class="significado">{{ p.significado_pt }}</div>
+            {% if p.exemplo_jp %}
+                <div class="exemplo">
+                    <div class="ex-jp">{{ p.exemplo_jp }}</div>
+                    {% if p.exemplo_pt %}<div class="ex-pt muted">{{ p.exemplo_pt }}</div>{% endif %}
+                </div>
+            {% endif %}
+            {% if p.nota %}<div class="nota">{{ p.nota }}</div>{% endif %}
+
+            <form action="{{ url_for('vocabulario.marcar_status', palavra_id=p.id) }}" method="post" class="status-form">
+                <button name="status" value="novo" {% if p.status == 'novo' %}disabled{% endif %}>Novo</button>
+                <button name="status" value="estudando" {% if p.status == 'estudando' %}disabled{% endif %}>Estudando</button>
+                <button name="status" value="aprendido" {% if p.status == 'aprendido' %}disabled{% endif %}>Aprendido</button>
+            </form>
+        </article>
+    {% else %}
+        <p class="muted">Nenhuma palavra cadastrada neste tópico ainda.</p>
+    {% endfor %}
+</div>
+
+<nav class="topico-nav">
+    {% if anterior %}
+        <a class="topico-nav-link" href="{{ url_for('vocabulario.topico', nivel=nivel.codigo, slug=anterior.slug) }}">
+            ← {{ anterior.titulo }}
+        </a>
+    {% else %}<span></span>{% endif %}
+    {% if proximo %}
+        <a class="topico-nav-link topico-nav-link-next" href="{{ url_for('vocabulario.topico', nivel=nivel.codigo, slug=proximo.slug) }}">
+            {{ proximo.titulo }} →
+        </a>
+    {% endif %}
+</nav>
+{% endblock %}

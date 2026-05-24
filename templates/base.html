@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JLPT Estudos{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-jp">日本語</span>
+                <span class="brand-pt">JLPT Estudos</span>
+            </a>
+            <nav class="topnav">
+                <a href="{{ url_for('vocabulario.roadmap', nivel='N5') }}">N5</a>
+                <a href="{{ url_for('vocabulario.roadmap', nivel='N4') }}">N4</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-list">
+                    {% for cat, msg in messages %}
+                        <div class="flash flash-{{ cat }}">{{ msg }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">JLPT Estudos · local · porta 5003</div>
+    </footer>
+</body>
+</html>
