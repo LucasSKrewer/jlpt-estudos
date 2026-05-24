@@ -54,25 +54,27 @@
 
 {% macro celula_dual(hira_kana, hira_romaji, kata_kana, kata_romaji) %}
     {% if hira_kana or kata_kana %}
-        <td class="kana-cel-wrap">
-            {% if hira_kana %}
-                <button type="button" class="kana-cel-mini kana-cel-hira btn-play" data-fala="{{ hira_kana }}" aria-label="Ouvir {{ hira_romaji }} (hiragana)">
-                    <span class="kana-glifo">{{ hira_kana }}</span>
-                </button>
-            {% else %}
-                <span class="kana-cel-mini kana-vazio-inline"></span>
-            {% endif %}
-            <span class="kana-romaji-dual">{{ hira_romaji or kata_romaji }}</span>
-            {% if kata_kana %}
-                <button type="button" class="kana-cel-mini kana-cel-kata btn-play" data-fala="{{ kata_kana }}" aria-label="Ouvir {{ kata_romaji }} (katakana)">
-                    <span class="kana-glifo">{{ kata_kana }}</span>
-                </button>
-            {% else %}
-                <span class="kana-cel-mini kana-vazio-inline"></span>
-            {% endif %}
+        <td class="kana-td">
+            <div class="kana-cel-wrap">
+                {% if hira_kana %}
+                    <button type="button" class="kana-cel-mini kana-cel-hira btn-play" data-fala="{{ hira_kana }}" aria-label="Ouvir {{ hira_romaji }} (hiragana)">
+                        <span class="kana-glifo">{{ hira_kana }}</span>
+                    </button>
+                {% else %}
+                    <span class="kana-cel-mini kana-vazio-inline"></span>
+                {% endif %}
+                <span class="kana-romaji-dual">{{ hira_romaji or kata_romaji }}</span>
+                {% if kata_kana %}
+                    <button type="button" class="kana-cel-mini kana-cel-kata btn-play" data-fala="{{ kata_kana }}" aria-label="Ouvir {{ kata_romaji }} (katakana)">
+                        <span class="kana-glifo">{{ kata_kana }}</span>
+                    </button>
+                {% else %}
+                    <span class="kana-cel-mini kana-vazio-inline"></span>
+                {% endif %}
+            </div>
         </td>
     {% else %}
-        <td class="kana-vazio"></td>
+        <td class="kana-td kana-td-vazio"></td>
     {% endif %}
 {% endmacro %}
 
