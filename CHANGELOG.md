@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.2.0] — 2026-05-24
+
+### Adicionado
+- Botão de áudio 🔊 ao lado de cada termo e de cada frase de exemplo na página do tópico, usando a Web Speech API do navegador
+- `static/audio.js`: seleção automática de voz japonesa (preferência por Haruka/Ayumi/Sayaka/Kyoko/Otoya), com taxa de fala ajustada para estudo
+- Aviso amigável quando o navegador não tem voz japonesa instalada, com instrução de adicionar o pacote de idiomas do Windows
+
 ## [0.1.0] — 2026-05-24
 
 ### Adicionado

@@ -69,6 +69,24 @@ Abra <http://127.0.0.1:5003> no navegador.
 4. Em **Progresso**, acompanhe a distribuição de status e o domínio por
    tópico no nível.
 
+### Áudio das palavras
+
+Cada palavra e cada frase de exemplo têm um botão 🔊 que toca a pronúncia
+usando a Web Speech API do navegador — sem download de arquivos, sem
+dependência externa.
+
+Para que funcione, o sistema operacional precisa ter uma voz em japonês
+instalada:
+
+- **Windows 10/11**: *Configurações → Hora e Idioma → Idioma → Adicionar idioma
+  → 日本語*, marcando a opção de "Reconhecimento de fala" / "Fala". A voz
+  *Haruka* (Win10) ou *Nanami/Ayumi* (Win11) será detectada automaticamente.
+- **macOS**: *Preferências do Sistema → Acessibilidade → Conteúdo Falado →
+  Voz do sistema*, adicionar uma voz japonesa (Kyoko ou Otoya).
+
+Se nenhuma voz japonesa estiver disponível, o app mostra um aviso e desabilita
+os botões.
+
 ## Estrutura
 
 ```
@@ -119,6 +137,7 @@ O banco fica em `jlpt.db` (gitignored — é progresso local do usuário).
 - [x] Página de progresso por nível
 - [x] N5 com 24 tópicos / ~285 palavras
 - [x] N4 com 8 tópicos / ~96 palavras
+- [x] Áudio TTS por palavra e por frase de exemplo (Web Speech API)
 - [ ] Expandir N4 para cobrir o currículo completo
 - [ ] Modo quiz por tópico (leitura → escolher significado)
 - [ ] Marcar tópicos como "revisar depois"

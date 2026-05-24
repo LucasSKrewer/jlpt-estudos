@@ -25,7 +25,10 @@
         <article id="palavra-{{ p.id }}" class="palavra status-{{ p.status }}">
             <div class="palavra-main">
                 <div class="palavra-jp">
-                    <div class="termo">{{ p.termo }}</div>
+                    <div class="termo-linha">
+                        <div class="termo">{{ p.termo }}</div>
+                        <button type="button" class="btn-play btn-play-lg" data-fala="{{ p.leitura }}" aria-label="Ouvir pronúncia da palavra">🔊</button>
+                    </div>
                     <div class="leitura">{{ p.leitura }}{% if p.romaji %} · <span class="romaji">{{ p.romaji }}</span>{% endif %}</div>
                 </div>
                 <div class="palavra-meta">
@@ -36,7 +39,10 @@
             <div class="significado">{{ p.significado_pt }}</div>
             {% if p.exemplo_jp %}
                 <div class="exemplo">
-                    <div class="ex-jp">{{ p.exemplo_jp }}</div>
+                    <div class="ex-jp-linha">
+                        <div class="ex-jp">{{ p.exemplo_jp }}</div>
+                        <button type="button" class="btn-play" data-fala="{{ p.exemplo_jp }}" aria-label="Ouvir frase de exemplo">🔊</button>
+                    </div>
                     {% if p.exemplo_pt %}<div class="ex-pt muted">{{ p.exemplo_pt }}</div>{% endif %}
                 </div>
             {% endif %}

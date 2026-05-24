@@ -103,8 +103,17 @@ main.container { padding-top: 32px; padding-bottom: 64px; }
 .palavra.status-estudando { border-left-color: var(--estudando); }
 .palavra.status-aprendido { border-left-color: var(--aprendido); background: #f5fbf8; }
 .palavra-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.termo-linha { display: flex; align-items: center; gap: 12px; }
 .palavra-jp .termo { font-size: 32px; font-weight: 600; line-height: 1.1; }
 .palavra-jp .leitura { font-size: 15px; color: var(--ink-soft); margin-top: 4px; }
+
+.btn-play { background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; padding: 0; line-height: 1; transition: all .15s ease; color: var(--ink-soft); }
+.btn-play:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+.btn-play:active:not(:disabled) { transform: scale(0.95); }
+.btn-play:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-play-lg { width: 40px; height: 40px; font-size: 16px; }
+.ex-jp-linha { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+.ex-jp-linha .ex-jp { flex: 1; }
 .romaji { font-style: italic; }
 .palavra-meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 .chip { background: var(--accent-soft); color: var(--accent); padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
