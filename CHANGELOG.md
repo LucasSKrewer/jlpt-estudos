@@ -5,6 +5,22 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.6.0] — 2026-05-24
+
+### Alterado
+- **Exercícios agora seguem os formatos oficiais da prova mojigoi (文字・語彙)** do JLPT N5/N4:
+  - **漢字読み (kanji yomi)** — mantido: mostra palavra com kanji, pede leitura em hiragana
+  - **表記 (hyouki)** — novo: mostra palavra em hiragana, pede a forma em kanji (distratores só com kanji)
+  - **文脈規定 (bunmyaku kitei)** — novo: mostra frase com lacuna (　　　) e pede a palavra que preenche; distratores priorizam mesma classe gramatical
+  - **Misto** — combina os 3 tipos com filtragem inteligente por aplicabilidade
+- Tipos "significado em PT" e "termo a partir de PT" **removidos** (não são formato oficial de prova; só treino casual)
+- Página inicial dos exercícios e tela de configuração agora exibem os nomes japoneses dos formatos
+- Áudio do botão 🔊 agora vem de `audio_texto` (sempre a leitura ou a frase completa), uniformizado entre os tipos
+
+### Notas
+- Todas as questões são geradas **dinamicamente** a partir do vocabulário do banco. Nenhuma questão é cópia de prova ou material oficial — o que reproduzimos é apenas o **formato público** das questões (informação amplamente documentada).
+- Para o tipo 4 (言いかえ類義 / sinônimo) faltam dados; fica como roadmap futuro.
+
 ## [0.5.0] — 2026-05-24
 
 ### Adicionado

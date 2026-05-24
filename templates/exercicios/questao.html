@@ -12,14 +12,14 @@
 
 <article class="questao-card">
     <div class="questao-enunciado">{{ questao.enunciado }}</div>
-    <div class="questao-pergunta">
+    <div class="questao-pergunta {% if questao.tipo == 'bunmyaku' %}questao-pergunta-frase{% endif %}">
         <span class="questao-pergunta-texto">{{ questao.pergunta }}</span>
-        {% if questao.tipo in ('leitura', 'significado') and questao.tipo != 'termo' %}
-            <button type="button" class="btn-play btn-play-lg" data-fala="{{ questao.pergunta if questao.tipo != 'significado' else (questao.pergunta_sub or questao.pergunta) }}" aria-label="Ouvir pronúncia">🔊</button>
+        {% if questao.audio_texto %}
+            <button type="button" class="btn-play btn-play-lg" data-fala="{{ questao.audio_texto }}" aria-label="Ouvir pronúncia">🔊</button>
         {% endif %}
     </div>
-    {% if questao.pergunta_sub and resposta %}
-        <div class="questao-pergunta-sub muted">{{ questao.pergunta_sub }}</div>
+    {% if questao.exemplo_pt and resposta %}
+        <div class="questao-pergunta-sub muted">{{ questao.exemplo_pt }}</div>
     {% endif %}
 
     <form action="{{ url_for('exercicios.responder', nivel=nivel, idx=idx) }}" method="post" class="alternativas">

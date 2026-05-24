@@ -467,7 +467,8 @@ main.container { padding-top: 36px; padding-bottom: 64px; }
     flex-wrap: wrap;
 }
 .questao-pergunta-texto { flex: 0 1 auto; }
-.questao-pergunta-sub { font-size: 16px; margin-bottom: 24px; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; }
+.questao-pergunta-frase .questao-pergunta-texto { font-size: 28px; line-height: 1.5; }
+.questao-pergunta-sub { font-size: 15px; margin-bottom: 24px; color: var(--ink-soft); font-style: italic; }
 .questao-pergunta + .alternativas { margin-top: 28px; }
 
 .alternativas {
