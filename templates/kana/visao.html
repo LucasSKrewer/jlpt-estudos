@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Hiragana e Katakana · JLPT Estudos{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <div class="crumb"><a href="{{ url_for('home') }}">Início</a> / Kana</div>
+        <h1>Hiragana e Katakana <span class="muted">— os silabários japoneses</span></h1>
+        <p class="muted">Antes de qualquer prova do JLPT, você precisa ler os dois sistemas com fluência. Ambos representam exatamente os mesmos sons — o que muda é <strong>quando</strong> usar cada um.</p>
+    </div>
+</div>
+
+<section class="kana-intro">
+    <div class="kana-intro-card">
+        <h2>ひらがな <span class="muted">Hiragana</span></h2>
+        <p>Linhas curvas e arredondadas. Criado a partir da forma cursiva de kanjis.</p>
+        <ul>
+            <li>Palavras nativas japonesas sem kanji (ありがとう, さくら)</li>
+            <li>Terminações verbais e adjetivais (食<strong>べる</strong>, 大き<strong>い</strong>)</li>
+            <li>Partículas gramaticais (は, が, を, に, で)</li>
+            <li>Furigana — leitura sobre kanjis difíceis</li>
+        </ul>
+    </div>
+    <div class="kana-intro-card">
+        <h2>カタカナ <span class="muted">Katakana</span></h2>
+        <p>Linhas retas e angulares. Criado a partir de fragmentos de kanjis.</p>
+        <ul>
+            <li>Palavras estrangeiras / empréstimos (コーヒー, テレビ, パン)</li>
+            <li>Onomatopeias (ドキドキ, ワンワン)</li>
+            <li>Nomes estrangeiros (ブラジル, ルーカス)</li>
+            <li>Ênfase — como itálico em português</li>
+            <li>Termos técnicos e científicos</li>
+        </ul>
+    </div>
+</section>
+
+<section class="kana-uso">
+    <h2 class="section-h">Qual usar em cada nível do JLPT</h2>
+    <table class="tabela">
+        <thead>
+            <tr><th>Nível</th><th>Hiragana</th><th>Katakana</th></tr>
+        </thead>
+        <tbody>
+            {% for u in uso %}
+                <tr>
+                    <td><strong>{{ u.nivel }}</strong></td>
+                    <td>{{ u.hiragana }}</td>
+                    <td>{{ u.katakana }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% macro tabela_gojuon(linhas) %}
+<table class="kana-tabela">
+    <tbody>
+        {% for linha in linhas %}
+            <tr>
+                {% for item in linha.celulas %}
+                    {% if item[0] %}
+                        <td>
+                            <button type="button" class="kana-cel btn-play" data-fala="{{ item[0] }}" aria-label="Ouvir {{ item[1] }}">
+                                <span class="kana-glifo">{{ item[0] }}</span>
+                                <span class="kana-romaji">{{ item[1] }}</span>
+                            </button>
+                        </td>
+                    {% else %}
+                        <td class="kana-vazio"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}
+
+{% macro tabela_extra(linhas) %}
+<table class="kana-tabela">
+    <tbody>
+        {% for linha in linhas %}
+            <tr>
+                {% for kana, romaji in linha %}
+                    <td>
+                        <button type="button" class="kana-cel btn-play" data-fala="{{ kana }}" aria-label="Ouvir {{ romaji }}">
+                            <span class="kana-glifo">{{ kana }}</span>
+                            <span class="kana-romaji">{{ romaji }}</span>
+                        </button>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}
+
+<section class="kana-secao">
+    <h2 class="section-h">Hiragana — tabela completa</h2>
+    <h3 class="kana-sub">Gojūon (五十音) — 46 sons básicos</h3>
+    {{ tabela_gojuon(gojuon_hira) }}
+    <h3 class="kana-sub">Dakuten / Handakuten — sons sonorizados (゛゜)</h3>
+    {{ tabela_extra(dakuten_hira) }}
+    <h3 class="kana-sub">Yōon — combinações com ゃ ゅ ょ</h3>
+    {{ tabela_extra(yoon_hira) }}
+</section>
+
+<section class="kana-secao">
+    <h2 class="section-h">Katakana — tabela completa</h2>
+    <h3 class="kana-sub">Gojūon (五十音)</h3>
+    {{ tabela_gojuon(gojuon_kata) }}
+    <h3 class="kana-sub">Dakuten / Handakuten</h3>
+    {{ tabela_extra(dakuten_kata) }}
+    <h3 class="kana-sub">Yōon</h3>
+    {{ tabela_extra(yoon_kata) }}
+</section>
+
+<section class="kana-dica">
+    <h3>Dica para memorizar</h3>
+    <p>Clique em qualquer caractere para ouvir a pronúncia. Pratique <strong>10 caracteres por dia</strong>: leia em voz alta, escreva à mão, ouça. Em 1-2 semanas você fecha hiragana, em 2-3 fecha katakana. Só depois disso o vocabulário do N5 começa a fazer sentido.</p>
+</section>
+{% endblock %}

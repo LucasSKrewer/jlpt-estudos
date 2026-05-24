@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from config import PORT, SECRET_KEY
 from database import init_db, get_conn
 from modulos.vocabulario import bp as vocabulario_bp
+from modulos.kana import bp as kana_bp
 
 
 def create_app():
@@ -12,6 +13,7 @@ def create_app():
     init_db()
 
     app.register_blueprint(vocabulario_bp, url_prefix="/vocabulario")
+    app.register_blueprint(kana_bp, url_prefix="/kana")
 
     @app.route("/")
     def home():

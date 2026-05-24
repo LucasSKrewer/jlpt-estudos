@@ -5,6 +5,23 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.3.0] — 2026-05-24
+
+### Adicionado
+- Nova aba **Kana** (`/kana/`) com referência completa dos silabários
+  - Tabela gojūon (46 caracteres) de hiragana e katakana
+  - Tabela dakuten/handakuten (25 caracteres × 2)
+  - Tabela yōon — combinações com ゃ/ゅ/ょ (33 × 2)
+  - Explicação de quando usar cada sistema (palavras nativas / partículas / terminações vs estrangeirismos / onomatopeias / nomes)
+  - Tabela mostrando o uso esperado em cada nível do JLPT (N5 → N3+)
+- Cada caractere tem botão 🔊 integrado à Web Speech API (reaproveita `static/audio.js`)
+- Blueprint `modulos/kana/` com `routes.py` e `dados.py` (constantes Python)
+- Link "Kana" no topbar
+
+### Revisão
+- Revisão de segurança (agente revisor-seguranca): 0 findings altos/médios; 3 baixos esperados em app local (secret_key dev, debug=True, sem CSRF)
+- QA do módulo kana (agente testador-modulo): 8/8 itens PASS; corrigida chave duplicada `"linha": "n"` em `modulos/kana/dados.py` (linha do ん/ン renomeada para `"nasal"`)
+
 ## [0.2.0] — 2026-05-24
 
 ### Adicionado

@@ -6,6 +6,7 @@ Sistema local em Flask para estudar vocabulário do JLPT (日本語能力試験)
 
 - **Fase 1 concluída**: estrutura, banco, blueprint vocabulário, templates, seeds N5/N4
 - **Fase 2 concluída**: áudio TTS por palavra e por frase de exemplo (Web Speech API, voz do SO)
+- **Fase 3 concluída**: aba Kana com hiragana + katakana (gojūon, dakuten, yōon) + uso por nível JLPT; revisada por agentes de segurança e QA
 - **Publicado**: [LucasSKrewer/jlpt-estudos](https://github.com/LucasSKrewer/jlpt-estudos) (público, MIT)
 - **Servidor**: Flask local, porta **5003**, rodando em background gerenciado pelo Claude
 - **Dados**: N5 com 24 tópicos / 285 palavras · N4 com 8 tópicos / 96 palavras

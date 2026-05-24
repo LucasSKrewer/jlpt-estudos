@@ -13,10 +13,11 @@ português e exemplo de uso, e acompanha o **progresso por palavra**
 
 ## Conteúdo atual
 
-| Nível | Tópicos | Palavras |
-|-------|---------|----------|
-| N5    | 24      | ~285     |
-| N4    | 8       | ~96      |
+| Seção          | Conteúdo                                             |
+|----------------|------------------------------------------------------|
+| Vocabulário N5 | 24 tópicos / ~285 palavras                           |
+| Vocabulário N4 | 8 tópicos / ~96 palavras                             |
+| Kana           | Hiragana + Katakana completos (gojūon, dakuten, yōon) |
 
 O conteúdo do **N5** cobre o currículo do JLPT N5 com tópicos progressivos
 (saudações → pronomes → números → tempo → família → verbos do dia a dia →
@@ -138,6 +139,7 @@ O banco fica em `jlpt.db` (gitignored — é progresso local do usuário).
 - [x] N5 com 24 tópicos / ~285 palavras
 - [x] N4 com 8 tópicos / ~96 palavras
 - [x] Áudio TTS por palavra e por frase de exemplo (Web Speech API)
+- [x] Aba Kana: hiragana + katakana com tabelas completas e uso por nível
 - [ ] Expandir N4 para cobrir o currículo completo
 - [ ] Modo quiz por tópico (leitura → escolher significado)
 - [ ] Marcar tópicos como "revisar depois"
