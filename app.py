@@ -9,6 +9,7 @@ from modulos.kana import bp as kana_bp
 def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
+    app.jinja_env.globals["zip"] = zip
 
     init_db()
 

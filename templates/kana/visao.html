@@ -2,7 +2,7 @@
 {% block title %}Hiragana e Katakana · JLPT Estudos{% endblock %}
 
 {% block content %}
-<div class="page-head">
+<div class="page-head page-head-center">
     <div>
         <div class="crumb"><a href="{{ url_for('home') }}">Início</a> / Kana</div>
         <h1>Hiragana e Katakana <span class="muted">— os silabários japoneses</span></h1>
@@ -35,8 +35,8 @@
 </section>
 
 <section class="kana-uso">
-    <h2 class="section-h">Qual usar em cada nível do JLPT</h2>
-    <table class="tabela">
+    <h2 class="section-h section-h-center">Qual usar em cada nível do JLPT</h2>
+    <table class="tabela tabela-center">
         <thead>
             <tr><th>Nível</th><th>Hiragana</th><th>Katakana</th></tr>
         </thead>
@@ -52,66 +52,76 @@
     </table>
 </section>
 
-{% macro tabela_gojuon(linhas) %}
-<table class="kana-tabela">
-    <tbody>
-        {% for linha in linhas %}
-            <tr>
-                {% for item in linha.celulas %}
-                    {% if item[0] %}
-                        <td>
-                            <button type="button" class="kana-cel btn-play" data-fala="{{ item[0] }}" aria-label="Ouvir {{ item[1] }}">
-                                <span class="kana-glifo">{{ item[0] }}</span>
-                                <span class="kana-romaji">{{ item[1] }}</span>
-                            </button>
-                        </td>
-                    {% else %}
-                        <td class="kana-vazio"></td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% macro celula_dual(hira_kana, hira_romaji, kata_kana, kata_romaji) %}
+    {% if hira_kana or kata_kana %}
+        <td class="kana-cel-wrap">
+            {% if hira_kana %}
+                <button type="button" class="kana-cel-mini kana-cel-hira btn-play" data-fala="{{ hira_kana }}" aria-label="Ouvir {{ hira_romaji }} (hiragana)">
+                    <span class="kana-glifo">{{ hira_kana }}</span>
+                </button>
+            {% else %}
+                <span class="kana-cel-mini kana-vazio-inline"></span>
+            {% endif %}
+            <span class="kana-romaji-dual">{{ hira_romaji or kata_romaji }}</span>
+            {% if kata_kana %}
+                <button type="button" class="kana-cel-mini kana-cel-kata btn-play" data-fala="{{ kata_kana }}" aria-label="Ouvir {{ kata_romaji }} (katakana)">
+                    <span class="kana-glifo">{{ kata_kana }}</span>
+                </button>
+            {% else %}
+                <span class="kana-cel-mini kana-vazio-inline"></span>
+            {% endif %}
+        </td>
+    {% else %}
+        <td class="kana-vazio"></td>
+    {% endif %}
 {% endmacro %}
 
-{% macro tabela_extra(linhas) %}
-<table class="kana-tabela">
+{% macro tabela_gojuon_dual(linhas_hira, linhas_kata) %}
+<div class="kana-tabela-wrap">
+<table class="kana-tabela kana-tabela-dual">
     <tbody>
-        {% for linha in linhas %}
+        {% for lh, lk in zip(linhas_hira, linhas_kata) %}
             <tr>
-                {% for kana, romaji in linha %}
-                    <td>
-                        <button type="button" class="kana-cel btn-play" data-fala="{{ kana }}" aria-label="Ouvir {{ romaji }}">
-                            <span class="kana-glifo">{{ kana }}</span>
-                            <span class="kana-romaji">{{ romaji }}</span>
-                        </button>
-                    </td>
+                {% for hira, kata in zip(lh.celulas, lk.celulas) %}
+                    {{ celula_dual(hira[0], hira[1], kata[0], kata[1]) }}
                 {% endfor %}
             </tr>
         {% endfor %}
     </tbody>
 </table>
+</div>
+{% endmacro %}
+
+{% macro tabela_extra_dual(linhas_hira, linhas_kata) %}
+<div class="kana-tabela-wrap">
+<table class="kana-tabela kana-tabela-dual">
+    <tbody>
+        {% for lh, lk in zip(linhas_hira, linhas_kata) %}
+            <tr>
+                {% for hira, kata in zip(lh, lk) %}
+                    {{ celula_dual(hira[0], hira[1], kata[0], kata[1]) }}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endmacro %}
 
 <section class="kana-secao">
-    <h2 class="section-h">Hiragana — tabela completa</h2>
-    <h3 class="kana-sub">Gojūon (五十音) — 46 sons básicos</h3>
-    {{ tabela_gojuon(gojuon_hira) }}
-    <h3 class="kana-sub">Dakuten / Handakuten — sons sonorizados (゛゜)</h3>
-    {{ tabela_extra(dakuten_hira) }}
-    <h3 class="kana-sub">Yōon — combinações com ゃ ゅ ょ</h3>
-    {{ tabela_extra(yoon_hira) }}
+    <h2 class="section-h section-h-center">Gojūon (五十音) <span class="muted">— 46 sons básicos</span></h2>
+    <p class="kana-legenda">Em cada célula: <span class="kana-legenda-hira">hiragana</span> · romaji · <span class="kana-legenda-kata">katakana</span></p>
+    {{ tabela_gojuon_dual(gojuon_hira, gojuon_kata) }}
 </section>
 
 <section class="kana-secao">
-    <h2 class="section-h">Katakana — tabela completa</h2>
-    <h3 class="kana-sub">Gojūon (五十音)</h3>
-    {{ tabela_gojuon(gojuon_kata) }}
-    <h3 class="kana-sub">Dakuten / Handakuten</h3>
-    {{ tabela_extra(dakuten_kata) }}
-    <h3 class="kana-sub">Yōon</h3>
-    {{ tabela_extra(yoon_kata) }}
+    <h2 class="section-h section-h-center">Dakuten e Handakuten <span class="muted">— sons sonorizados (゛゜)</span></h2>
+    {{ tabela_extra_dual(dakuten_hira, dakuten_kata) }}
+</section>
+
+<section class="kana-secao">
+    <h2 class="section-h section-h-center">Yōon <span class="muted">— combinações com ゃ ゅ ょ</span></h2>
+    {{ tabela_extra_dual(yoon_hira, yoon_kata) }}
 </section>
 
 <section class="kana-dica">

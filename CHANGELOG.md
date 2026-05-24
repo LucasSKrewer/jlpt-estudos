@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.3.1] — 2026-05-24
+
+### Alterado
+- Aba Kana: tabelas de hiragana e katakana **mescladas em uma única tabela** por seção (gojūon, dakuten, yōon). Cada célula agora mostra hiragana, romaji e katakana lado a lado — antes apareciam em seções separadas, dando a impressão de conteúdo repetido.
+- Todas as seções da aba Kana **centralizadas** (intro cards, tabelas, tabela de uso por nível e card de dica) com `max-width: 920px` e `margin: auto`.
+- Hiragana destacado em vermelho (cor de accent) e katakana em azul (cor do nível N4) dentro das células — facilita distinguir os dois sistemas de relance.
+
 ## [0.3.0] — 2026-05-24
 
 ### Adicionado
