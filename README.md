@@ -153,4 +153,4 @@ O banco fica em `jlpt.db` (gitignored — é progresso local do usuário).
 
 ## Licença
 
-[MIT](LICENSE)
+[Open Source](LICENSE) — uso, modificação e distribuição livres, com atribuição.

@@ -5,6 +5,23 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.4.0] — 2026-05-24
+
+### Alterado
+- **Redesign visual completo em estilo japonês:**
+  - Nova paleta: vermelho selo (#bc002d) hi-no-maru, papel washi (#faf6ec) como fundo, sumi (#1a1a1a) como tinta, matcha (#5c7a3e) para N5/aprendido, índigo (#1e3a5f) para N4, dourado (#b8860b) como detalhe
+  - Tipografia japonesa com **Noto Serif JP** e **Noto Sans JP** carregadas via Google Fonts; títulos, termos e kanji decorativos em serif
+  - Header com selo vermelho 学 (estudo) ao lado do brand "日本語学", linha vermelha + dourada decorativa na base
+  - Home com hero em círculo vermelho gigante (200px) contendo 日; cards com kanji decorativo grande (初/中/字) por card e selos coloridos
+  - Footer com selo discreto 学 e estilo washi
+  - Page heads com border-bottom suave e títulos em serif
+  - Cards de palavras com fonte serif no termo, exemplos com borda dourada à esquerda
+  - Roadmap numerado em serif japonês
+- README: rótulo de licença trocado de "MIT" para "Open Source" (texto do LICENSE continua sendo MIT)
+
+### Corrigido
+- `.overview` tinha `grid-template-columns: repeat(3, 1fr) 100%` — a 4ª coluna de 100% empurrava a barra de progresso pra fora, criando scrollbar horizontal espúrio em todas as páginas de roadmap
+
 ## [0.3.1] — 2026-05-24
 
 ### Alterado

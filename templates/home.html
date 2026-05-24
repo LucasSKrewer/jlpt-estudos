@@ -3,28 +3,38 @@
 
 {% block content %}
 <section class="hero">
+    <div class="hero-circulo">日</div>
     <h1>日本語能力試験</h1>
-    <p class="hero-sub">Estudos para a prova de proficiência em japonês — foco em N5 e N4.</p>
+    <p class="hero-sub">Nihongo Nōryoku Shiken — Estudos para a prova de proficiência em japonês</p>
 </section>
 
 <section class="cards">
     {% for n in niveis %}
         <a class="card card-nivel nivel-{{ n.codigo|lower }}" href="{{ url_for('vocabulario.roadmap', nivel=n.codigo) }}">
-            <div class="card-tag">{{ n.codigo }}</div>
+            <span class="card-tag">{{ n.codigo }}</span>
+            <div class="card-kanji">{% if n.codigo == 'N5' %}初{% else %}中{% endif %}</div>
             <h2>{{ n.nome }}</h2>
             <p>{{ n.descricao }}</p>
             <span class="card-cta">Abrir roadmap →</span>
         </a>
     {% endfor %}
+    <a class="card card-kana" href="{{ url_for('kana.visao') }}">
+        <span class="card-tag">仮名</span>
+        <div class="card-kanji">字</div>
+        <h2>Hiragana &amp; Katakana</h2>
+        <p>Tabelas completas dos silabários, com áudio em cada caractere.</p>
+        <span class="card-cta">Estudar kana →</span>
+    </a>
 </section>
 
 <section class="info">
-    <h3>Como funciona</h3>
+    <h3>道 — O caminho</h3>
     <ol>
-        <li>Escolha um nível (comece pelo <strong>N5</strong>).</li>
-        <li>Siga o roadmap de tópicos na ordem sugerida.</li>
+        <li>Domine primeiro <strong>hiragana</strong> e <strong>katakana</strong> na aba <strong>Kana</strong>.</li>
+        <li>Comece pelo <strong>N5</strong> e siga o roadmap de tópicos na ordem sugerida.</li>
         <li>Em cada tópico, marque as palavras como <em>estudando</em> ou <em>aprendido</em>.</li>
         <li>Acompanhe seu progresso por nível e por tópico.</li>
+        <li>Quando o N5 estiver firme, avance para o <strong>N4</strong>.</li>
     </ol>
 </section>
 {% endblock %}
